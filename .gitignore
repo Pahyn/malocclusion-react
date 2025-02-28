@@ -1,39 +1,24 @@
-# Node.js dependencies
-node_modules/
-npm-debug.log*
-yarn-error.log
-package-lock.json
-yarn.lock
-
-# Build files
-dist/
-build/
-
-# Local environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Editor/IDE settings
-.vscode/
-.idea/
-*.sublime-workspace
-
 # Logs
-logs/
+logs
 *.log
-*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# System files
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
-
-# MacOS/Linux/Windows-specific files
-*.swp
-*.swo
-*.bak
-*.orig
-._*
-.gitignore
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
