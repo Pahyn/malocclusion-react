@@ -7,7 +7,7 @@ import UploadForm from './UploadForm'
 function App() {
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
       <UploadForm />
     </div>
   )
