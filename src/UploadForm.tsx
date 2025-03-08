@@ -3,8 +3,9 @@ import * as tf from '@tensorflow/tfjs';
 
 const UploadForm = () => {
     const [model, setModel] = useState<tf.LayersModel | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null); // For image preview
     const [image, setImage] = useState<HTMLImageElement | null>(null);
-    // const [prediction, setPrediction] = useState<string | null>(null);
+    const [prediction, setPrediction] = useState<number[][] | null>(null);
 
     // Load the model when the component mounts
     useEffect(() => {
@@ -27,6 +28,7 @@ const UploadForm = () => {
 
         const img = new Image();
         img.src = URL.createObjectURL(file);
+        setImagePreview(URL.createObjectURL(file)); // Generate preview URL
         img.onload = () => setImage(img);
     };
 
@@ -49,28 +51,41 @@ const UploadForm = () => {
         if (!model || !image) return;
 
         const tensor = processImage(image);
-        const prediction = model.predict(tensor);
-        const output = await prediction.toString();
+        const prediction = model.predict(tensor) as tf.Tensor;
+        const output = await prediction.array() as number[][];
 
-        // setPrediction(output);
+        setPrediction(output);
         console.log('Prediction:', output);
+        console.log(typeof (output))
     };
 
     return (
         <div className="flex flex-col items-center gap-4 p-6 bg-white rounded-lg">
 
-            <h2 className="text-xl font-semibold uppercase">Select a model:</h2>
+            {/* <h2 className="text-xl font-semibold uppercase">Select a model:</h2>
             <select className="block w-1/5 px-4 py-1 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline"
                 name="model">
                 <option value="volvo">Model 1</option>
-            </select>
+            </select> */}
 
 
             <h2 className="text-xl font-semibold uppercase">Upload an Image</h2>
 
             <input type="file" accept="image/*" onChange={handleImageUpload} className="p-2 border rounded-md" />
 
-            {/* {image && <img src={image} alt="Preview" className="flex-wrap object-cover w-1/5 rounded-md h-1/5" />} */}
+            {/* Image preview */}
+            {imagePreview && (
+                <div className="mt-5 text-center">
+                    <h3 className="mb-2 text-lg font-semibold">Image Preview:</h3>
+                    <div className="max-w-xs p-2 overflow-hidden border border-gray-200 rounded-lg max-h-xs">
+                        <img
+                            src={imagePreview}
+                            alt="Preview"
+                            className="object-contain w-full h-auto"
+                        />
+                    </div>
+                </div>
+            )}
 
             <button
                 onClick={predict}
@@ -78,6 +93,22 @@ const UploadForm = () => {
             >
                 Classify
             </button>
+
+            {prediction && (
+                <div>
+                    <h3><b>Prediction Results:</b></h3>
+                    <ul>
+                        {prediction[0].map((prob, index) => (
+                            <li key={index}>
+                                Class {index + 1}: {prob.toFixed(4)}
+                            </li>
+                        ))}
+                    </ul>
+                    <p>
+                        Model prediction is <strong> Class {prediction[0].indexOf(Math.max(...prediction[0])) + 1} </strong>
+                    </p>
+                </div>
+            )}
         </div>
     );
 };
