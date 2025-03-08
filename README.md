@@ -46,6 +46,6 @@ The machine learning model was trained on **Google Colab** using a dataset of de
 
 ---
 
-## Technologies Used
+## Issue
 
 - compatibility issues between Tensorflow and Keras with the Tensorflow js. This issue create error in the model.json
