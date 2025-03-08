@@ -1,8 +1,6 @@
-# Skeletal Malocclusion Classification App
+# Skeletal Malocclusion Classification
 
-![Project Banner](https://via.placeholder.com/1200x400) <!-- Add a banner image if available -->
-
-This project is a **Skeletal Malocclusion Classification** application that takes an image as input and predicts the class of malocclusion. The app is built using **React.js** and utilizes **TensorFlow.js (TFJS)** for running the machine learning model directly in the browser. This is my updated project on previous project whihc utilized **Flask**
+This project is a **Skeletal Malocclusion Classification** application that takes an image as input and predicts the class of malocclusion. The app is built using **React.js** and utilizes **TensorFlow.js (TFJS)** for running the machine learning model directly in the browser. This is my updated project on previous project which utilized **Flask** and **Python**
 
 ---
 
@@ -42,7 +40,7 @@ The machine learning model was trained on **Google Colab** using a dataset of de
 ## Technologies Used
 
 - **Frontend**: React.js
-- **Machine Learning**: TensorFlow.js (TFJS)
+- **Machine Learning**: TensorFlow.js (TFJS) - Converted model is located in the public folder
 - **Model Training**: TensorFlow (Python) on Google Colab
 - **Styling**: Tailwind CSS
 
